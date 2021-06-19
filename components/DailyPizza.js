@@ -1,11 +1,11 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Grid, LinearProgress, Paper, Typography } from '@material-ui/core'
+import { useMediaQuery, Button, Grid, LinearProgress, Paper, Typography } from '@material-ui/core'
 import { Check } from '@material-ui/icons'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   dailyPizza: {
     position: 'relative',
     padding: '8px 16px',
@@ -32,12 +32,23 @@ const useStyles = makeStyles(() => ({
 
   image: {
     overflow: 'hidden',
+    marginBottom: 16,
+    maxWidth: '100%',
+    maxHeight: 120,
     borderTopLeftRadius: '16px',
     borderBottomLeftRadius: '16px',
-    width: 160,
-    height: 240,
+
     '& img': {
       maxHeight: '100%',
+      width: '100%',
+    },
+
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: 160,
+      maxHeight: 240,
+      '& img': {
+        width: 'auto',
+      },
     },
   },
   smallText: {
@@ -51,6 +62,7 @@ export default function DailyPizza({ dailyPizza }) {
   const classes = useStyles()
   const router = useRouter()
   const dispatch = useDispatch()
+  const matches = useMediaQuery('(min-width:600px)')
 
   const handleClick = () => {
     dispatch({ type: 'BUY_DAILYPIZZA', dailyPizza })
@@ -71,7 +83,8 @@ export default function DailyPizza({ dailyPizza }) {
         Pizza do dia:
       </Typography>
       <Grid container>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
+          {!matches && <Typography variant="h5">Pizza de {dailyPizza.flavor}</Typography>}
           <div className={classes.image}>
             <img
               src="https://camo.githubusercontent.com/6ac5ba8b6460638681d4882bb0cf74188c97f60c80117afee7c318d2259509ff/68747470733a2f2f696d672e70697a7a612f3430302f343030"
@@ -79,12 +92,13 @@ export default function DailyPizza({ dailyPizza }) {
             />
           </div>
         </Grid>
-        <Grid item xs={8}>
-          <Typography variant="h5">Pizza do dia:</Typography>
+
+        <Grid item xs={12} sm={8}>
+          {matches && <Typography variant="h5">Pizza de {dailyPizza.flavor}</Typography>}
           <Typography variant="subtitle2">Massa:</Typography>
           <Typography variant="body1">{dailyPizza.dough}</Typography>
           <Typography variant="subtitle2">Ingredientes:</Typography>
-          <Typography variant="body1">{dailyPizza.flavors.join(', ')}</Typography>
+          <Typography variant="body1">{dailyPizza.ingredients.join(', ')}</Typography>
           <Typography variant="subtitle2">Tamanho:</Typography>
           <Typography variant="body1">{dailyPizza.size}</Typography>
 

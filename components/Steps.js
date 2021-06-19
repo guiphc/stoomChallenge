@@ -1,17 +1,19 @@
 import React from 'react'
-import { Step, StepLabel, Stepper } from '@material-ui/core'
+import { useMediaQuery, Step, StepLabel, Stepper } from '@material-ui/core'
 
 export default function Steps({ active }) {
+  const matches = useMediaQuery('(min-width:600px)')
+
   return (
-    <Stepper activeStep={active}>
+    <Stepper activeStep={active} style={{ padding: !matches ? '24px 0' : 24 }}>
       <Step>
-        <StepLabel>Selecione sua massa</StepLabel>
+        <StepLabel>{matches && 'Selecione sua '}massa</StepLabel>
       </Step>
       <Step>
-        <StepLabel>Selecione o tamanho</StepLabel>
+        <StepLabel>{matches && 'Selecione o '}tamanho</StepLabel>
       </Step>
       <Step>
-        <StepLabel>Selecione o recheio</StepLabel>
+        <StepLabel>{matches && 'Selecione o '}recheio</StepLabel>
       </Step>
     </Stepper>
   )

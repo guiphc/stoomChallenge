@@ -1,10 +1,11 @@
 {
   "dailyPizza": {
     "dough": "Tradicional",
-    "flavors": ["Pepperoni", "4 queijos", "Vegetariana"],
+    "flavor": "Pepperoni",
     "size": "Grande",
     "price": "40,00",
-    "points": 55
+    "points": 55,
+    "ingredients": ["mussarela", "pepperoni"]
   },
 
   "doughs": ["tradicional", "integral", "cenoura"],
