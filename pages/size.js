@@ -15,8 +15,6 @@ import {
 import Steps from '../components/Steps'
 import Link from 'next/link'
 
-import DailyPizza from '../components/DailyPizza'
-
 const useStyles = makeStyles(() => ({}))
 
 export default function Index() {
@@ -24,18 +22,6 @@ export default function Index() {
   const state = useSelector((state) => state)
   const dispatch = useDispatch()
   const sizes = ['broto', 'grande']
-
-  const handleNext = () => {
-    dispatch({ type: 'NEXT' })
-  }
-
-  const handleBack = () => {
-    dispatch({ type: 'PREV' })
-  }
-
-  const handleReset = () => {
-    dispatch({ type: 'RESET' })
-  }
 
   const handleChange = (event) => {
     dispatch({ type: 'UPDATE', size: event.target.value })
@@ -48,7 +34,7 @@ export default function Index() {
       <Divider style={{ margin: '16px 0' }} />
 
       <Typography variant="h5" color="primary">
-        Selecione o tamanho <Chip label="0/1" />
+        Selecione o tamanho <Chip label={`${state.size ? 1 : 0}/1`} />
       </Typography>
 
       <RadioGroup name="size" onChange={handleChange} value={state.size}>

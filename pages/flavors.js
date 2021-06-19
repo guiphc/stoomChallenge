@@ -46,7 +46,6 @@ export default function Flavors() {
         <FormControlLabel
           key={flavor}
           label={flavor}
-          // disabled={state.flavors.length >= 3}
           control={
             <Checkbox checked={state.flavors.includes(flavor)} name={flavor} onChange={handleChange} />
           }
@@ -62,7 +61,7 @@ export default function Flavors() {
 
         <Link href="/feedback">
           <Button className={classes.button} variant="contained" disabled={state.flavors.length < 3}>
-            Pagar
+            Pedir
           </Button>
         </Link>
       </Grid>

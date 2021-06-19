@@ -4,11 +4,11 @@ import { createStore } from 'redux'
 let store
 
 const initialState = {
-  step: 0,
-  points: 10,
-  dought: '',
-  size: '',
+  dough: '',
   flavors: [],
+  points: 10,
+  size: '',
+  step: 0,
 }
 
 function reducer(state, { type, ...payload }) {
@@ -18,6 +18,10 @@ function reducer(state, { type, ...payload }) {
   if (type === 'REMOVE_FLAVOR') {
     return { ...state, flavors: state.flavors.filter((i) => i !== payload.flavor) }
   }
+  if (type === 'BUY_DAILYPIZZA') {
+    return { ...state, ...payload.dailyPizza, points: state.points + payload.dailyPizza.points }
+  }
+
   return { ...state, ...payload }
 }
 

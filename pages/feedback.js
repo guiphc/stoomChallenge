@@ -8,16 +8,16 @@ export default function Index() {
   const router = useRouter()
 
   useEffect(() => {
-    if (!state.dought) {
-      router.push('/')
+    if (!state.dough) {
+      return router.push('/')
     }
 
     if (!state.size) {
-      router.push('/size')
+      return router.push('/size')
     }
 
     if (state.flavors.length < 3) {
-      router.push('/flavors')
+      return router.push('/flavors')
     }
   }, [state])
 
@@ -27,7 +27,7 @@ export default function Index() {
         Obrigado por pedir com a gente!
       </Typography>
       <Typography variant="h6">Seu pedido foi:</Typography>
-      <Typography variant="body1">Massa: {state.dought}</Typography>
+      <Typography variant="body1">Massa: {state.dough}</Typography>
       <Typography variant="body1">Tamanho: {state.size}</Typography>
       <Typography variant="body1">Sabores: {state.flavors.map((i) => `${i}, `)}</Typography>
     </Container>

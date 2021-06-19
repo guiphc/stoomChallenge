@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
 import {
   Button,
   Chip,
@@ -17,32 +16,17 @@ import Link from 'next/link'
 
 import DailyPizza from '../components/DailyPizza'
 
-const useStyles = makeStyles(() => ({}))
-
 export default function Index() {
-  const classes = useStyles()
   const state = useSelector((state) => state)
   const dispatch = useDispatch()
-  const doughts = ['tradicional', 'integral']
-
-  const handleNext = () => {
-    dispatch({ type: 'NEXT' })
-  }
-
-  const handleBack = () => {
-    dispatch({ type: 'PREV' })
-  }
-
-  const handleReset = () => {
-    dispatch({ type: 'RESET' })
-  }
+  const doughs = ['tradicional', 'integral']
 
   const handleChange = (event) => {
-    dispatch({ type: 'UPDATE', dought: event.target.value })
+    dispatch({ type: 'UPDATE', dough: event.target.value })
   }
 
   return (
-    <Container maxWidth="sm" className={classes.root}>
+    <Container maxWidth="sm">
       <DailyPizza />
 
       <Divider style={{ margin: '48px 0 32px 0' }} />
@@ -53,11 +37,11 @@ export default function Index() {
       <Steps active={0} />
 
       <Typography variant="h5" color="primary">
-        Selecione sua massa <Chip label="0/1" />
+        Selecione sua massa <Chip label={`${state.dough ? 1 : 0}/1`} />
       </Typography>
 
-      <RadioGroup name="dought" onChange={handleChange} value={state.dought}>
-        {doughts.map((item) => (
+      <RadioGroup name="dough" onChange={handleChange} value={state.dough}>
+        {doughs.map((item) => (
           <FormControlLabel key={item} control={<Radio value={item} />} label={item} />
         ))}
       </RadioGroup>
@@ -68,7 +52,7 @@ export default function Index() {
         <div />
 
         <Link href="size">
-          <Button className={classes.button} variant="contained" disabled={!state.dought}>
+          <Button variant="contained" disabled={!state.dough}>
             Selecionar o tamanho
           </Button>
         </Link>
