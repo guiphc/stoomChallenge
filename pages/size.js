@@ -23,7 +23,7 @@ export default function Index() {
   const classes = useStyles()
   const state = useSelector((state) => state)
   const dispatch = useDispatch()
-  const doughts = ['tradicional', 'integral']
+  const sizes = ['broto', 'grande']
 
   const handleNext = () => {
     dispatch({ type: 'NEXT' })
@@ -38,26 +38,21 @@ export default function Index() {
   }
 
   const handleChange = (event) => {
-    dispatch({ type: 'UPDATE', dought: event.target.value })
+    dispatch({ type: 'UPDATE', size: event.target.value })
   }
 
   return (
     <Container maxWidth="sm" className={classes.root}>
-      <DailyPizza />
-
-      <Divider style={{ margin: '48px 0 32px 0' }} />
-      <Typography variant="h4" align="center">
-        Ou monte sua pizza
-      </Typography>
-
       <Steps active={0} />
 
+      <Divider style={{ margin: '16px 0' }} />
+
       <Typography variant="h5" color="primary">
-        Selecione sua massa <Chip label="0/1" />
+        Selecione o tamanho <Chip label="0/1" />
       </Typography>
 
-      <RadioGroup name="dought" onChange={handleChange} value={state.dought}>
-        {doughts.map((item) => (
+      <RadioGroup name="size" onChange={handleChange} value={state.size}>
+        {sizes.map((item) => (
           <FormControlLabel key={item} control={<Radio value={item} />} label={item} />
         ))}
       </RadioGroup>
@@ -65,11 +60,13 @@ export default function Index() {
       <Divider style={{ margin: '16px 0 ' }} />
 
       <Grid container justify="space-between">
-        <div />
+        <Link href="/">
+          <Button className={classes.button}>Voltar</Button>
+        </Link>
 
-        <Link href="size">
-          <Button className={classes.button} variant="contained" disabled={!state.dought}>
-            Selecionar o tamanho
+        <Link href="/flavors">
+          <Button className={classes.button} variant="contained" disabled={!state.size}>
+            Selecionar sabor
           </Button>
         </Link>
       </Grid>

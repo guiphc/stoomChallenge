@@ -1,7 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { LocalPizza } from '@material-ui/icons'
+import Link from 'next/link'
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -10,36 +12,44 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.primary.main,
     color: '#fff',
   },
+  logo: {
+    '& div': { cursor: 'pointer' },
+  },
 }))
 
 export default function Layout({ children }) {
   const classes = useStyles()
+  const state = useSelector((state) => state)
+
+  console.log(state)
 
   return (
     <>
       <div className={classes.header}>
         <Grid container>
-          <Grid item container xs={8}>
-            <Grid item>
-              <LocalPizza color="secondary" style={{ fontSize: '64px' }} />
-            </Grid>
-            <Grid item>
-              <Typography component="h1" variant="h3">
-                PizzaStoom
-              </Typography>
+          <Link href="/">
+            <Grid item container xs={8} className={classes.logo}>
+              <Grid item>
+                <LocalPizza color="secondary" style={{ fontSize: '64px' }} />
+              </Grid>
+              <Grid item>
+                <Typography component="h1" variant="h3">
+                  PizzaStoom
+                </Typography>
 
-              <Typography variant="h6" color="secondary">
-                é pizza, sim.
-              </Typography>
+                <Typography variant="h6" color="secondary">
+                  é pizza, sim.
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
+          </Link>
 
           <Grid item align="right" xs={4}>
             <Typography variant="h6" color="secondary">
               StoomPoints
             </Typography>
             <Typography variant="body1" color="secondary">
-              0 pontos.
+              {state.points} pontos.
             </Typography>
           </Grid>
         </Grid>
