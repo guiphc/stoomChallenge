@@ -7,6 +7,7 @@ import {
   Divider,
   FormControlLabel,
   Grid,
+  LinearProgress,
   Radio,
   RadioGroup,
   Typography,
@@ -16,18 +17,32 @@ import Link from 'next/link'
 
 import DailyPizza from '../components/DailyPizza'
 
-export default function Index() {
+export async function getServerSideProps() {
+  const doughs = await fetch(`https://my-json-server.typicode.com/guiphc/stoomChallenge/doughs`).then((res) =>
+    res.json(),
+  )
+  const dailyPizza = await fetch(`https://my-json-server.typicode.com/guiphc/stoomChallenge/dailyPizza`).then(
+    (res) => res.json(),
+  )
+
+  return { props: { doughs, dailyPizza } }
+}
+
+export default function Index({ doughs, dailyPizza }) {
   const state = useSelector((state) => state)
   const dispatch = useDispatch()
-  const doughs = ['tradicional', 'integral']
 
   const handleChange = (event) => {
     dispatch({ type: 'UPDATE', dough: event.target.value })
   }
 
+  if (!doughs) {
+    return <LinearProgress />
+  }
+
   return (
     <Container maxWidth="sm">
-      <DailyPizza />
+      <DailyPizza dailyPizza={dailyPizza} />
 
       <Divider style={{ margin: '48px 0 32px 0' }} />
       <Typography variant="h4" align="center">
@@ -57,6 +72,8 @@ export default function Index() {
           </Button>
         </Link>
       </Grid>
+      <br />
+      <br />
     </Container>
   )
 }

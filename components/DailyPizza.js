@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Button, Paper, Typography } from '@material-ui/core'
+import { Button, Grid, LinearProgress, Paper, Typography } from '@material-ui/core'
 import { Check } from '@material-ui/icons'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
@@ -47,21 +47,18 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-export default function DailyPizza() {
+export default function DailyPizza({ dailyPizza }) {
   const classes = useStyles()
   const router = useRouter()
   const dispatch = useDispatch()
-  const dailyPizza = {
-    dough: 'Tradicional',
-    flavors: ['Pepperoni', '4 queijos', 'Vegetariana'],
-    size: 'Grande',
-    price: '40,00',
-    points: 55,
-  }
 
   const handleClick = () => {
     dispatch({ type: 'BUY_DAILYPIZZA', dailyPizza })
     router.push('/feedback')
+  }
+
+  if (!dailyPizza) {
+    return <LinearProgress />
   }
 
   return (

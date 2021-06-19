@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
 import {
   Button,
   Chip,
@@ -8,6 +7,7 @@ import {
   Divider,
   FormControlLabel,
   Grid,
+  LinearProgress,
   Radio,
   RadioGroup,
   Typography,
@@ -15,21 +15,28 @@ import {
 import Steps from '../components/Steps'
 import Link from 'next/link'
 
-const useStyles = makeStyles(() => ({}))
+export async function getServerSideProps() {
+  const response = await fetch(`https://my-json-server.typicode.com/guiphc/stoomChallenge/sizes`).then(
+    (res) => res.json(),
+  )
 
-export default function Index() {
-  const classes = useStyles()
+  return { props: { sizes: response } }
+}
+export default function Index({ sizes }) {
   const state = useSelector((state) => state)
   const dispatch = useDispatch()
-  const sizes = ['broto', 'grande']
 
   const handleChange = (event) => {
     dispatch({ type: 'UPDATE', size: event.target.value })
   }
 
+  if (!sizes) {
+    return <LinearProgress />
+  }
+
   return (
-    <Container maxWidth="sm" className={classes.root}>
-      <Steps active={0} />
+    <Container maxWidth="sm">
+      <Steps active={1} />
 
       <Divider style={{ margin: '16px 0' }} />
 
@@ -47,11 +54,11 @@ export default function Index() {
 
       <Grid container justify="space-between">
         <Link href="/">
-          <Button className={classes.button}>Voltar</Button>
+          <Button>Voltar</Button>
         </Link>
 
         <Link href="/flavors">
-          <Button className={classes.button} variant="contained" disabled={!state.size}>
+          <Button variant="contained" disabled={!state.size}>
             Selecionar sabor
           </Button>
         </Link>

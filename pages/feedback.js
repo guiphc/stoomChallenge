@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Container, Typography } from '@material-ui/core'
+import { Button, Container, Typography } from '@material-ui/core'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export default function Index() {
   const state = useSelector((state) => state)
@@ -30,6 +31,13 @@ export default function Index() {
       <Typography variant="body1">Massa: {state.dough}</Typography>
       <Typography variant="body1">Tamanho: {state.size}</Typography>
       <Typography variant="body1">Sabores: {state.flavors.map((i) => `${i}, `)}</Typography>
+      <br />
+      <br />
+
+      {/* @todo reset */}
+      <Link href="/">
+        <Button variant="contained">Pedir mais</Button>
+      </Link>
     </Container>
   )
 }

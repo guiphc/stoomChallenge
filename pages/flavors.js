@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
 import {
   Button,
   Checkbox,
@@ -9,18 +8,23 @@ import {
   Divider,
   FormControlLabel,
   Grid,
+  LinearProgress,
   Typography,
 } from '@material-ui/core'
 import Steps from '../components/Steps'
 import Link from 'next/link'
 
-const useStyles = makeStyles(() => ({}))
+export async function getServerSideProps() {
+  const response = await fetch(`https://my-json-server.typicode.com/guiphc/stoomChallenge/flavors`).then(
+    (res) => res.json(),
+  )
 
-export default function Flavors() {
-  const classes = useStyles()
+  return { props: { flavors: response } }
+}
+
+export default function Flavors({ flavors }) {
   const state = useSelector((state) => state)
   const dispatch = useDispatch()
-  const flavors = ['pepperoni', 'abacate', '4 queijos', 'mexicana']
 
   const handleChange = ({ target: { checked, name } }) => {
     if (checked) {
@@ -34,8 +38,12 @@ export default function Flavors() {
     dispatch({ type: 'REMOVE_FLAVOR', flavor: name })
   }
 
+  if (!flavors) {
+    return <LinearProgress />
+  }
+
   return (
-    <Container maxWidth="sm" className={classes.root}>
+    <Container maxWidth="sm">
       <Steps active={2} />
 
       <Typography variant="h5" color="primary">
@@ -56,11 +64,11 @@ export default function Flavors() {
 
       <Grid container justify="space-between">
         <Link href="/size">
-          <Button className={classes.button}>Voltar</Button>
+          <Button>Voltar</Button>
         </Link>
 
         <Link href="/feedback">
-          <Button className={classes.button} variant="contained" disabled={state.flavors.length < 3}>
+          <Button variant="contained" disabled={state.flavors.length < 3}>
             Pedir
           </Button>
         </Link>
