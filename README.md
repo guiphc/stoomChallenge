@@ -2,7 +2,8 @@
 Formulário para montar uma pizza
 
 Frameworks: React e NextJS
-para rodar local ```yarn dev```
+
+para rodar local ```yarn dev``` ou ```yarn build``` e ```yarn start```
 
 Biblioteca de components Material-UI
 
