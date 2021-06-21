@@ -59,7 +59,7 @@ export default function Flavors({ flavors }) {
             <InputLabel htmlFor={name} style={{ cursor: 'pointer' }}>
               Sabor: {name}
             </InputLabel>
-            <Typography variant="caption">Ingredientes: {ingredients.map((i) => `${i}, `)}</Typography>
+            <Typography variant="caption">Ingredientes: {ingredients.join(', ')}</Typography>
             <Typography variant="h6">{price}</Typography>
           </Grid>
         </Grid>
@@ -73,7 +73,7 @@ export default function Flavors({ flavors }) {
         </Link>
 
         <Link href="/payment">
-          <Button variant="contained" disabled={state.flavors.length < 3}>
+          <Button variant="contained" disabled={state.flavors.length === 0}>
             Finalizar
           </Button>
         </Link>

@@ -35,7 +35,7 @@ export default function Index({ payment = [] }) {
       return router.push('/size')
     }
 
-    if (state.flavors.length < 3) {
+    if (state.flavors.length === 0) {
       return router.push('/flavors')
     }
   }, [state])
@@ -58,7 +58,7 @@ export default function Index({ payment = [] }) {
       <Typography variant="h6">Sua pizza é:</Typography>
       <Typography variant="body1">Massa: {state.dough}</Typography>
       <Typography variant="body1">Tamanho: {state.size}</Typography>
-      <Typography variant="body1">Sabores: {state.flavors.map((i) => `${i}, `)}</Typography>
+      <Typography variant="body1">Sabores: {state.flavors.join(', ')}</Typography>
 
       <Divider style={{ margin: '32px 0' }} />
 
@@ -75,7 +75,6 @@ export default function Index({ payment = [] }) {
 
       <Grid container justify="space-between">
         <div />
-
         <Button variant="contained" onClick={handleClick}>
           Comprar
         </Button>

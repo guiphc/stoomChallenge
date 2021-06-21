@@ -26,6 +26,8 @@ export default function Layout({ children }) {
   const classes = useStyles()
   const state = useSelector((state) => state)
 
+  console.log(state)
+
   return (
     <>
       <div className={classes.header}>

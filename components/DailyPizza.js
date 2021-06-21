@@ -65,7 +65,10 @@ export default function DailyPizza({ dailyPizza }) {
   const matches = useMediaQuery('(min-width:600px)')
 
   const handleClick = () => {
-    dispatch({ type: 'BUY_DAILYPIZZA', dailyPizza })
+    dispatch({
+      type: 'BUY_DAILYPIZZA',
+      dailyPizza: { ...dailyPizza, flavors: dailyPizza.flavors.map(({ name }) => name) },
+    })
     router.push('/payment')
   }
 
@@ -82,9 +85,10 @@ export default function DailyPizza({ dailyPizza }) {
       <Typography variant="h6" style={{ marginBottom: 24 }}>
         Pizza do dia:
       </Typography>
+
       <Grid container>
         <Grid item xs={12} sm={4}>
-          {!matches && <Typography variant="h5">Pizza de {dailyPizza.flavors.name}</Typography>}
+          {!matches && <Typography variant="h5">Pizza de {dailyPizza.flavors[0].name}</Typography>}
           <div className={classes.image}>
             <img
               src="https://camo.githubusercontent.com/6ac5ba8b6460638681d4882bb0cf74188c97f60c80117afee7c318d2259509ff/68747470733a2f2f696d672e70697a7a612f3430302f343030"
@@ -94,13 +98,13 @@ export default function DailyPizza({ dailyPizza }) {
         </Grid>
 
         <Grid item xs={12} sm={8}>
-          {matches && <Typography variant="h5">Pizza de {dailyPizza.flavor}</Typography>}
+          {matches && <Typography variant="h5">Pizza de {dailyPizza.flavors[0].name}</Typography>}
           <Typography variant="subtitle2">Massa:</Typography>
           <Typography variant="body1">{dailyPizza.dough}</Typography>
-          {dailyPizza.flavors && dailyPizza.flavors.ingredients && (
+          {dailyPizza.flavors[0] && dailyPizza.flavors[0].ingredients && (
             <>
               <Typography variant="subtitle2">Ingredientes:</Typography>
-              <Typography variant="body1">{dailyPizza.flavors.ingredients.join(', ')}</Typography>
+              <Typography variant="body1">{dailyPizza.flavors[0].ingredients.join(', ')}</Typography>
             </>
           )}
           <Typography variant="subtitle2">Tamanho:</Typography>

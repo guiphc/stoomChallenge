@@ -64,7 +64,6 @@ export default function Index({ doughs, dailyPizza }) {
 
       <Grid container justify="space-between">
         <div />
-
         <Link href="size">
           <Button variant="contained" disabled={!state.dough}>
             Selecionar o tamanho
