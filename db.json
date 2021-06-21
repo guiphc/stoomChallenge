@@ -7,9 +7,13 @@
     "promoPoints": 55,
     "ingredients": ["mussarela", "pepperoni"]
   },
-
   "doughs": ["tradicional", "integral", "cenoura"],
-  "flavors": ["pepperoni", "frango catupiry", "4 queijos", "mexicana"],
+  "flavors": [
+    { "name": "pepperoni", "ingredients": ["mussarela", "pepperonim"] },
+    { "name": "frango catupiry", "ingredients": ["mussarela", "pepperonim"] },
+    { "name": "4 queijos", "ingredients": ["mussarela", "chedder"] },
+    { "name": "mexicana", "ingredients": ["mussarela", "pimenta"] }
+  ],
   "payment": ["dinheiro", "cartão"],
   "sizes": ["broto", "grande", "gigante"]
 }
