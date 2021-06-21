@@ -5,11 +5,11 @@
     "size": "grande",
     "price": "40,00",
     "promoPoints": 55,
-    "ingredients": ["mussarela", "pepperoni"],
-    "payment": ["dinheiro", "cartão"]
+    "ingredients": ["mussarela", "pepperoni"]
   },
 
   "doughs": ["tradicional", "integral", "cenoura"],
-  "sizes": ["broto", "grande", "gigante"],
-  "flavors": ["pepperoni", "frango catupiry", "4 queijos", "mexicana"]
+  "flavors": ["pepperoni", "frango catupiry", "4 queijos", "mexicana"],
+  "payment": ["dinheiro", "cartão"],
+  "sizes": ["broto", "grande", "gigante"]
 }
