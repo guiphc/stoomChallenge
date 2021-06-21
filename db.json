@@ -1,14 +1,18 @@
 {
   "dailyPizza": {
-    "dough": "Tradicional",
-    "flavor": "Pepperoni",
-    "size": "Grande",
+    "dough": "tradicional",
+    "flavors": [{ "name": "pepperoni", "ingredients": ["mussarela", "pepperonim"] }],
+    "size": "grande",
     "price": "40,00",
-    "points": 55,
-    "ingredients": ["mussarela", "pepperoni"]
+    "promoPoints": 55
   },
-
   "doughs": ["tradicional", "integral", "cenoura"],
-  "sizes": ["broto", "grande", "gigante"],
-  "flavors": ["pepperoni", "frango catupiry", "4 queijos", "mexicana"]
+  "flavors": [
+    { "name": "pepperoni", "ingredients": ["mussarela", "pepperonim"] },
+    { "name": "frango catupiry", "ingredients": ["mussarela", "pepperonim"] },
+    { "name": "4 queijos", "ingredients": ["mussarela", "chedder"] },
+    { "name": "mexicana", "ingredients": ["mussarela", "pimenta"] }
+  ],
+  "payment": ["dinheiro", "cartão"],
+  "sizes": ["broto", "grande", "gigante"]
 }

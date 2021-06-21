@@ -38,8 +38,6 @@ export default function Index({ sizes }) {
     <Container maxWidth="sm">
       <Steps active={1} />
 
-      <Divider style={{ margin: '16px 0' }} />
-
       <Typography variant="h5" color="primary">
         Selecione o tamanho <Chip label={`${state.size ? 1 : 0}/1`} />
       </Typography>

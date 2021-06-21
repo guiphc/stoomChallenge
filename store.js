@@ -8,20 +8,31 @@ let store
 const initialState = {
   dough: '',
   flavors: [],
+  payment: '',
   points: 10,
   size: '',
-  step: 0,
+  promoPoints: null,
 }
 
 function reducer(state, { type, ...payload }) {
   if (type === 'ADD_FLAVOR') {
-    return { ...state, flavors: [...state.flavors, payload.flavor] }
+    return { ...state, flavors: [...state.flavors, payload.flavor], promoPoints: null }
   }
   if (type === 'REMOVE_FLAVOR') {
-    return { ...state, flavors: state.flavors.filter((i) => i !== payload.flavor) }
+    return { ...state, flavors: state.flavors.filter((i) => i !== payload.flavor), promoPoints: null }
   }
   if (type === 'BUY_DAILYPIZZA') {
-    return { ...state, ...payload.dailyPizza, points: state.points + payload.dailyPizza.points }
+    return { ...state, ...payload.dailyPizza }
+  }
+  if (type === 'INCREASE_POINTS') {
+    return { ...state, points: state.points + payload.points }
+  }
+  if (type === 'CHANGE_PAYMENT') {
+    return { ...state, ...payload }
+  }
+
+  if (type === 'UPDATE') {
+    return { ...state, ...payload, promoPoints: null }
   }
 
   return { ...state, ...payload }
@@ -30,7 +41,7 @@ function reducer(state, { type, ...payload }) {
 const persistConfig = {
   key: 'primary',
   storage,
-  whitelist: ['points'],
+  whitelist: ['dough', 'flavors', 'payment', 'points', 'size'],
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)

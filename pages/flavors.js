@@ -6,8 +6,8 @@ import {
   Chip,
   Container,
   Divider,
-  FormControlLabel,
   Grid,
+  InputLabel,
   LinearProgress,
   Typography,
 } from '@material-ui/core'
@@ -50,14 +50,19 @@ export default function Flavors({ flavors }) {
         Selecione os sabores <Chip label={`${state.flavors.length}/3`} />
       </Typography>
 
-      {flavors.map((flavor) => (
-        <FormControlLabel
-          key={flavor}
-          label={flavor}
-          control={
-            <Checkbox checked={state.flavors.includes(flavor)} name={flavor} onChange={handleChange} />
-          }
-        />
+      {flavors.map(({ name, ingredients, price }) => (
+        <Grid container key={name} style={{ marginBottom: 8 }} alignItems="center">
+          <Grid item>
+            <Checkbox checked={state.flavors.includes(name)} name={name} onChange={handleChange} id={name} />
+          </Grid>
+          <Grid item>
+            <InputLabel htmlFor={name} style={{ cursor: 'pointer' }}>
+              Sabor: {name}
+            </InputLabel>
+            <Typography variant="caption">Ingredientes: {ingredients.map((i) => `${i}, `)}</Typography>
+            <Typography variant="h6">{price}</Typography>
+          </Grid>
+        </Grid>
       ))}
 
       <Divider style={{ margin: '16px 0 ' }} />
@@ -67,9 +72,9 @@ export default function Flavors({ flavors }) {
           <Button>Voltar</Button>
         </Link>
 
-        <Link href="/feedback">
+        <Link href="/payment">
           <Button variant="contained" disabled={state.flavors.length < 3}>
-            Pedir
+            Finalizar
           </Button>
         </Link>
       </Grid>

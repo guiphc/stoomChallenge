@@ -12,10 +12,9 @@ import {
   RadioGroup,
   Typography,
 } from '@material-ui/core'
-import Steps from '../components/Steps'
 import Link from 'next/link'
-
 import DailyPizza from '../components/DailyPizza'
+import Steps from '../components/Steps'
 
 export async function getServerSideProps() {
   const doughs = await fetch(`https://my-json-server.typicode.com/guiphc/stoomChallenge/doughs`).then((res) =>

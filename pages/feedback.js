@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Button, Container, Typography } from '@material-ui/core'
+import { Button, Container, Grid, Typography } from '@material-ui/core'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
@@ -23,7 +23,7 @@ export default function Index() {
   }, [state])
 
   return (
-    <Container maxWidth="sm" style={{ padding: '32px 0' }}>
+    <Container maxWidth="sm" style={{ padding: '32px 8px' }}>
       <Typography variant="h4" gutterBottom>
         Obrigado por pedir com a gente!
       </Typography>
@@ -32,12 +32,19 @@ export default function Index() {
       <Typography variant="body1">Tamanho: {state.size}</Typography>
       <Typography variant="body1">Sabores: {state.flavors.map((i) => `${i}, `)}</Typography>
       <br />
+      <Typography variant="body1">Pagamento: {state.payment}</Typography>
       <br />
+      {state.promoPoints && (
+        <Typography variant="body1">Pontos que você ganhou: {state.promoPoints}</Typography>
+      )}
 
-      {/* @todo reset */}
-      <Link href="/">
-        <Button variant="contained">Pedir mais</Button>
-      </Link>
+      <Grid container justify="space-between">
+        <div />
+
+        <Link href="/">
+          <Button variant="contained">Pedir mais</Button>
+        </Link>
+      </Grid>
     </Container>
   )
 }

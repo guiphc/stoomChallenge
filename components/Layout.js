@@ -15,20 +15,23 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     '& div': { cursor: 'pointer' },
   },
+  stoomPoints: {
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'right',
+    },
+  },
 }))
 
 export default function Layout({ children }) {
   const classes = useStyles()
   const state = useSelector((state) => state)
 
-  console.log(state)
-
   return (
     <>
       <div className={classes.header}>
         <Grid container>
           <Link href="/">
-            <Grid item container xs={8} className={classes.logo}>
+            <Grid item container xs={12} sm={8} className={classes.logo}>
               <Grid item>
                 <LocalPizza color="secondary" style={{ fontSize: '64px' }} />
               </Grid>
@@ -44,7 +47,7 @@ export default function Layout({ children }) {
             </Grid>
           </Link>
 
-          <Grid item align="right" xs={4}>
+          <Grid item xs={12} sm={4} className={classes.stoomPoints}>
             <Typography variant="h6" color="secondary">
               StoomPoints
             </Typography>
